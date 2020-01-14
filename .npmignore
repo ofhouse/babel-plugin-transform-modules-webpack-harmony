@@ -1,0 +1,5 @@
+lib
+tsconfig.json
+tsconfig.*.json
+jest.config.js
+.prettierrc.yaml
