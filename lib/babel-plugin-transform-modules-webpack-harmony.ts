@@ -4,13 +4,24 @@ type BabelT = typeof Babel;
 type PluginOptions = {
   webpackRequire?: string;
   webpackExports?: string;
+  resolve?: (moduleName: string) => string;
 };
 
 export default function(babel: BabelT, options: PluginOptions = {}) {
-  let importCounter = 0;
+  let importCounter = -1;
 
   function resolve(moduleName) {
     return `node_modules/${moduleName}`;
+  }
+
+  // Get a incremental number for the modules
+  // We use a function here for the increment because when this plugin
+  // gets bundled the increment could be triggered by side-effects
+  // var counter = b ? b : importCounter++;
+  // -> ++ can be triggered here even if b is truthy
+  function getModuleCount() {
+    importCounter = importCounter + 1;
+    return importCounter;
   }
 
   function safeVarName(moduleName, counter = null, isPure = false) {
@@ -18,18 +29,19 @@ export default function(babel: BabelT, options: PluginOptions = {}) {
     const normalizedModuleName = moduleName.replace(/[\@\/]/g, '_');
     const defaultAppendix = isPure ? '_default' : '';
 
-    const _counter = typeof counter === 'number' ? counter : importCounter++;
+    const _counter = typeof counter === 'number' ? counter : getModuleCount();
     const varName = `${normalizedModuleName}__WEBPACK_IMPORTED_MODULE_${_counter}__${defaultAppendix}`;
 
     return {
       name: varName,
-      counter: 0,
+      counter: _counter,
     };
   }
 
   const { types: t } = babel;
   const WEBPACK_REQUIRE = options.webpackRequire || '__webpack_require__';
   const WEBPACK_EXPORTS = options.webpackExports || '__webpack_exports__';
+  const resolveModuleSource = options.resolve || resolve;
   const varsToReplace = new Map();
 
   return {
@@ -82,7 +94,7 @@ export default function(babel: BabelT, options: PluginOptions = {}) {
                 t.variableDeclarator(
                   t.identifier(varName.name),
                   t.callExpression(t.identifier(WEBPACK_REQUIRE), [
-                    t.stringLiteral(resolve(source.value)),
+                    t.stringLiteral(resolveModuleSource(source.value)),
                   ])
                 ),
               ])
@@ -126,7 +138,7 @@ export default function(babel: BabelT, options: PluginOptions = {}) {
                   t.variableDeclarator(
                     t.identifier(varName.name),
                     t.callExpression(t.identifier(WEBPACK_REQUIRE), [
-                      t.stringLiteral(resolve(source.value)),
+                      t.stringLiteral(resolveModuleSource(source.value)),
                     ])
                   ),
                 ])
