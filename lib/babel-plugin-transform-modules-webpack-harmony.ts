@@ -1,16 +1,39 @@
-import * as Babel from '@babel/core';
+import { declare } from '@babel/helper-plugin-utils';
+import { template, types as t, ConfigAPI } from '@babel/core';
 
-type BabelT = typeof Babel;
 type PluginOptions = {
   webpackRequire?: string;
   webpackExports?: string;
   resolve?: (moduleName: string) => string;
 };
 
-export default function(babel: BabelT, options: PluginOptions = {}) {
-  let importCounter = -1;
+// Wrapper for harmony module
+const buildWrapper = template(
+  `
+(function(PARAM_MODULE, PARAM_EXPORTS, PARAM_REQUIRE) {
+  "use strict";
+  PARAM_REQUIRE.r(PARAM_EXPORTS);
+})
+`
+);
 
-  function resolve(moduleName) {
+function injectWrapper(path, wrapper) {
+  const { body, directives } = path.node;
+  path.node.directives = [];
+  path.node.body = [];
+  const moduleWrapper = path.pushContainer('body', wrapper)[0];
+  const moduleFactory = moduleWrapper.get('expression.body');
+  moduleFactory.pushContainer('directives', directives);
+  moduleFactory.pushContainer('body', body);
+}
+
+export default declare((api: ConfigAPI, options: PluginOptions = {}) => {
+  // Babel 7
+  api.assertVersion(7);
+
+  let importCounter: number = -1;
+
+  function resolve(moduleName: string) {
     return `node_modules/${moduleName}`;
   }
 
@@ -24,7 +47,11 @@ export default function(babel: BabelT, options: PluginOptions = {}) {
     return importCounter;
   }
 
-  function safeVarName(moduleName, counter = null, isPure = false) {
+  function safeVarName(
+    moduleName: string,
+    counter: number | null = null,
+    isPure = false
+  ) {
     // Replace @ and / in module name with _
     const normalizedModuleName = moduleName.replace(/[\@\/]/g, '_');
     const defaultAppendix = isPure ? '_default' : '';
@@ -38,7 +65,7 @@ export default function(babel: BabelT, options: PluginOptions = {}) {
     };
   }
 
-  const { types: t } = babel;
+  const WEBPACK_MODULE = '__unused_webpack_module';
   const WEBPACK_REQUIRE = options.webpackRequire || '__webpack_require__';
   const WEBPACK_EXPORTS = options.webpackExports || '__webpack_exports__';
   const resolveModuleSource = options.resolve || resolve;
@@ -47,6 +74,20 @@ export default function(babel: BabelT, options: PluginOptions = {}) {
   return {
     name: 'harmony-import',
     visitor: {
+      Program: {
+        // Apply wrapper
+        exit(path) {
+          injectWrapper(
+            path,
+            buildWrapper({
+              PARAM_MODULE: WEBPACK_MODULE,
+              PARAM_EXPORTS: WEBPACK_EXPORTS,
+              PARAM_REQUIRE: WEBPACK_REQUIRE,
+            })
+          );
+        },
+      },
+
       // Rename variables touched by harmony imports
       // This has to be done here because of the interoperability with
       // @babel/preset-react
@@ -188,4 +229,4 @@ export default function(babel: BabelT, options: PluginOptions = {}) {
       },
     },
   };
-}
+});

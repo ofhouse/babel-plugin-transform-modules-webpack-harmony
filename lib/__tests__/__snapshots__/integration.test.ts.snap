@@ -2,30 +2,36 @@
 
 exports[`plugin-transform-modules-webpack-harmony JSX code 1`] = `
 Object {
-  Symbol(jest-snapshot-serializer-raw): "var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(\\"node_modules/react\\");
+  Symbol(jest-snapshot-serializer-raw): "(function (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+  \\"use strict\\";
 
-var react__WEBPACK_IMPORTED_MODULE_0___default = __webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+  __webpack_require__.r(__webpack_exports__);
 
-var _blocks_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(\\"node_modules/@blocks/react\\");
+  var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(\\"node_modules/react\\");
 
-var _ref = () => react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"Blocks\\"].Root, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderLogo\\"], null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderLogo\\"].Logo, {
-  to: \\"/\\"
-}), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderLogo\\"].Nav, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderLogo\\"].Link, {
-  to: \\"/about\\"
-}, \\"About\\"), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderLogo\\"].Link, {
-  to: \\"/blog\\"
-}, \\"Blog\\"), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderLogo\\"].Link, {
-  to: \\"/contact\\"
-}, \\"Contact\\"))), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderBasic\\"], null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderBasic\\"].Logo, {
-  to: \\"/\\"
-}, \\"Hello\\"), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderBasic\\"].Nav, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderBasic\\"].Link, {
-  to: \\"/about\\"
-}, \\"About\\"), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderBasic\\"].Link, {
-  to: \\"/blog\\"
-}, \\"Blog\\"), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderBasic\\"].Link, {
-  to: \\"/contact\\"
-}, \\"Contact\\"))));
+  var react__WEBPACK_IMPORTED_MODULE_0___default = __webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-__webpack_exports__[\\"default\\"] = (_ref);",
+  var _blocks_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(\\"node_modules/@blocks/react\\");
+
+  var _ref = () => react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"Blocks\\"].Root, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderLogo\\"], null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderLogo\\"].Logo, {
+    to: \\"/\\"
+  }), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderLogo\\"].Nav, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderLogo\\"].Link, {
+    to: \\"/about\\"
+  }, \\"About\\"), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderLogo\\"].Link, {
+    to: \\"/blog\\"
+  }, \\"Blog\\"), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderLogo\\"].Link, {
+    to: \\"/contact\\"
+  }, \\"Contact\\"))), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderBasic\\"], null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderBasic\\"].Logo, {
+    to: \\"/\\"
+  }, \\"Hello\\"), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderBasic\\"].Nav, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderBasic\\"].Link, {
+    to: \\"/about\\"
+  }, \\"About\\"), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderBasic\\"].Link, {
+    to: \\"/blog\\"
+  }, \\"Blog\\"), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_blocks_react__WEBPACK_IMPORTED_MODULE_1__[\\"HeaderBasic\\"].Link, {
+    to: \\"/contact\\"
+  }, \\"Contact\\"))));
+
+  __webpack_exports__[\\"default\\"] = (_ref);
+});",
 }
 `;
