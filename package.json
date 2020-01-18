@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-transform-modules-webpack-harmony",
-  "version": "0.0.1-alpha001",
+  "version": "0.0.1-alpha002",
   "main": "dist/babel-plugin-transform-modules-webpack-harmony.js",
   "author": {
     "name": "Felix Haus",
